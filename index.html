@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<p>
+  <script type="application/processing">
+
+    float max_distance;
+
+    void setup() {
+      size(2500, 1500); 
+      smooth();
+      frameRate(); //temp
+      noStroke();
+      max_distance = dist(0, 0, width, height);
+    }
+
+    void draw() 
+    {
+      background(200);
+
+      for(int i = 0; i <= width; i += 50) {
+        for(int j = 0; j <= width; j += 100) {
+
+          float size = dist(mouseX, mouseY, i, j);
+          size = size/max_distance * 240;
+
+          if (size < 50) {
+            fill(size+20, 20);
+            strokeWeight(size/10);
+          }
+          else{
+            fill(size, 20);
+            strokeWeight(size/8);
+          };
+          stroke(50, size/2);
+
+          pushMatrix();
+          rotate(radians(0));
+          translate(i, j);
+          scale(1);
+          triangle(25, 50, -25, 50, 0, 0);
+          triangle(0, 0, 50, 0, 25, 50);
+          triangle(25+50, 50, -25+50, 50, 0+50, 0);
+          popMatrix();
+
+          pushMatrix();
+          rotate(radians(0));
+          translate(i, j);
+          scale(1);
+          triangle(-25, 50, 25, 50, 0, 100);
+          triangle(50, 100, 0, 100, 25, 50);
+          triangle(25, 50, 75, 50, 50, 100);
+          popMatrix();
+
+        }
+      }
+    }
+
+  </script>
+  <canvas width="200" height="200"></canvas>
+</p>
+
+<script src="js/processing.js"></script>
+</body>
+</html>
